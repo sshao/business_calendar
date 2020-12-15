@@ -12,11 +12,6 @@ jobs:
     strategy:
       matrix:
         ruby-version: [2.3.1, head]
-        include:
-          - ruby-version: 1.8.7
-            gemfile: gemfiles/ree.gemfile
-          - ruby-version: 1.9.3
-            gemfile: gemfiles/ruby_1.9.3.gemfile
 
     steps:
       - uses: actions/checkout@v2
@@ -25,8 +20,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
       - name: Install dependencies
-        env:
-          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
         run: bundle install
       - name: Run tests
         run: bundle exec rspec
